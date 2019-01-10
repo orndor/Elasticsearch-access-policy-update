@@ -40,7 +40,8 @@ def lambda_handler(event, context):
     )
     if response["Reservations"] != []:
         # Find the public IP address of the instance within the response.
-        public_ip = response["Reservations"][0]\
+        public_ip = response\
+        ["Reservations"][0]\
         ["Instances"][0]\
         ["NetworkInterfaces"][0]\
         ["PrivateIpAddresses"][0]\
