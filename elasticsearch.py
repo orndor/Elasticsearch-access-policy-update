@@ -6,7 +6,7 @@
     Python Version: 3.6
 
 Background: A logstash golden image EC2 spot instance may spin up
-spontaniously, and the Elasticsearch server it pipelines logs to needs
+spontaneously, and the Elasticsearch server it pipelines logs to needs
 to allow it (with a new public IP) to connect.
 
 This function is intended to be used in AWS Lambda to find a specific EC2
@@ -41,7 +41,7 @@ def lambda_handler(event, context):
     if response["Reservations"] != []:  # Info will still get returned, but "Reservations" will be blank if no match is found.
         # Find the public IP address of the instance within the response.
         public_ip = response["Reservations"][0]["Instances"][0]["NetworkInterfaces"][0]["PrivateIpAddresses"][0]["Association"]["PublicIp"]
-        # Craft a new Policy Document with the new public IP address, and push it to a specific elastic search instance.
+        # Craft a new Policy Document with the new public IP address, and push it to a specific elasticsearch instance.
         new_access_policy = esclient.update_elasticsearch_domain_config(DomainName=es_domain,AccessPolicies='{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"AWS":"*"},"Action":"es:*","Resource":"' + es_arn + '","Condition":{"IpAddress":{"aws:SourceIp":["' + public_ip + '"]}}}]}')
     else:
         pass
