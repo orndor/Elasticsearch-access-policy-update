@@ -2,7 +2,7 @@
 AWS Lmbda Function which updates an AWS Elasticsearch Access Policy with logstash spot instance IP
 
 Background: A logstash golden image EC2 spot instance may spin up
-spontaniously, and the Elasticsearch server it pipelines logs to needs
+spontaneously, and the Elasticsearch server it pipelines logs to needs
 to allow it (with a new public IP) to connect.
 
 This function is intended to be used in AWS Lambda to find a specific EC2
