@@ -51,7 +51,7 @@ def lambda_handler(event, context):
         new_access_policy = esclient.update_elasticsearch_domain_config\
         (DomainName=es_domain,AccessPolicies='{"Version":"2012-10-17",' + \
         '"Statement":[{"Effect":"Allow","Principal":{"AWS":"*"},' + \
-        "Action":"es:*","Resource":"' + es_arn + '",' + \
+        '"Action":"es:*","Resource":"' + es_arn + '",' + \
         '"Condition":{"IpAddress":{"aws:SourceIp":["' + public_ip + '"]}}}]}')
     else:
         pass
