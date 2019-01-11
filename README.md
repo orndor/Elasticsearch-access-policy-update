@@ -35,6 +35,6 @@ Here are some other required items within AWS to make this work:
      }
    }
 ``` 
-3) Labmda IAM role which allows the following:
+3) An IMA which Lambda assumes which allows the following:
 - Allow EC2 Describe Instances
 - Allow Update Elasticsearch Domain Config on the required ES domain
