@@ -14,3 +14,27 @@ to allow the originally matched EC2 instance access.
 See requirements.txt for other AWS items which need to be setup.
 
 ![Diagram of Function](https://orndor.com/images/ElasticSearchArch.png)
+
+
+Here are some other required items within AWS to make this work:
+
+1) A logstash server pushing logs to an AWS managed ES domain.
+2) A CloudWatch event, configured as follows:
+```json
+   {
+     "source": [
+       "aws.ec2"
+     ],
+     "detail-type": [
+       "EC2 Instance State-change Notification"
+     ],
+     "detail": {
+       "state": [
+         "running"
+       ]
+     }
+   }
+``` 
+3) Labmda IAM role which allows the following:
+- Allow EC2 Describe Instances
+- Allow Update Elasticsearch Domain Config on the required ES domain
