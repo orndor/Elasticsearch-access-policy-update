@@ -18,13 +18,14 @@ to allow the originally matched EC2 instance access.
 # Import the AWS SDK
 import boto3
 
+
 # Required function definition for AWS
 def lambda_handler(event, context):
-# Predefine some variables so we can easily update input parameters.
+    # Predefine some variables so we can easily update input parameters.
     key = 'Name'
     value = 'logstash'
     es_domain = 'examplees'
-    es_arn = "PASTE ARN BETWEEN QUOTES, EXAMPLE: arn:aws:es:us-east-1:123456789012:domain/examplees/*"
+    es_arn = "PASTE FULL ESDOMAIN ARN BETWEEN QUOTES"
     # Create a boto3 EC2 client
     ec2client = boto3.client('ec2')
     # Create a boto3 Elasticsearch client
@@ -49,11 +50,13 @@ def lambda_handler(event, context):
         ["PublicIp"]
         # Craft a new Policy Document with the new public IP address,
         # and push it to a specific elastic search instance.
-        new_access_policy = esclient.update_elasticsearch_domain_config\
-        (DomainName=es_domain,AccessPolicies='{"Version":"2012-10-17",' + \
-        '"Statement":[{"Effect":"Allow","Principal":{"AWS":"*"},' + \
-        '"Action":"es:*","Resource":"' + es_arn + '",' + \
-        '"Condition":{"IpAddress":{"aws:SourceIp":["' + public_ip + '"]}}}]}')
+        esclient.update_elasticsearch_domain_config(
+            DomainName=es_domain, AccessPolicies='{"Version":"2012-10-17",'
+            '"Statement":[{"Effect":"Allow","Principal":{"AWS":"*"},'
+            '"Action":"es:*","Resource":"' + es_arn + '",'
+            '"Condition":{"IpAddress":{"aws:SourceIp":'
+            '["' + public_ip + '"]}}}]}'
+        )
     else:
         pass
 
