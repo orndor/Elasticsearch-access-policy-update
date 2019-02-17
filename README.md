@@ -1,5 +1,5 @@
 # Elasticsearch-access-policy-update
-![Diagram of Function](https://orndor.com/images/ElasticSearchArch.png)
+![Diagram of Function](https://orndor.com/wp-content/uploads/2019/01/ElasticSearchArch-1.png)
 AWS Lambda Function which updates an AWS Elasticsearch Access Policy with logstash spot instance IP
 
 Background: A logstash golden image EC2 spot instance may spin up
