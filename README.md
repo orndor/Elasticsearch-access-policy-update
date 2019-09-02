@@ -2,7 +2,7 @@
 ![Diagram of Function](https://orndor.com/wp-content/uploads/2019/01/ElasticSearchArch-1.png)
 ## AWS Lambda Function which updates an AWS Elasticsearch Access Policy with specific instance IP
 
-**Background: A logstash golden image EC2 spot instance may spin up
+**Background: A logstash golden image EC2 instance may spin up
 spontaneously, and the Elasticsearch server it pipelines logs to needs
 to allow it (with a new public IP) to connect.**
 
